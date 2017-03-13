@@ -1,6 +1,12 @@
 // @flow
 //
-const config = require('./config.js');
+const fs = require('fs');
+let config;
+if (fs.existsSync('./config.js')) {
+  config = require('./config.js');
+} else {
+  config = require('./config.docker.js');
+}
 const logger = require('winston');
 const isText = require('istextorbinary').isText;
 

@@ -25,7 +25,7 @@ const nc = nats.connect({
   'servers': natsServers, 
   //To prevent payload conversion from a Buffer to a string, set the 
   // preserveBuffers option to true. Message payload return will be a Buffer..
-  'preserveBuffers': false
+  'preserveBuffers': true
 });
 // currentServer is the URL of the connected server.
 logger.info(`connected to nats (host=${nc.currentServer.url.host})`);
@@ -57,7 +57,7 @@ nc.subscribe('>', (data, replyto, subject) => {
 const displayLog = (subject, data, replyto = false) => {
   io.emit('log', {
     subject: subject,
-    data: data,
+    data: data+'',
     replyto: replyto
   });
 };
